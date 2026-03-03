@@ -1,13 +1,11 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
-
-	interface ButtonProps {
+	interface IconProps {
 		name: string;
 	}
 
-	let { name }: ButtonProps = $props();
+	let { name }: IconProps = $props();
 </script>
 
 <div class="dark:invert">
-	<img src="/icons/{name}.svg" alt="name">
+	<img src="/icons/{name}.svg" alt="name" />
 </div>

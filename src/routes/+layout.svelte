@@ -2,24 +2,22 @@
 	import '../app.css';
 	import NavButton from '$lib/components/NavButton.svelte';
 	import { onMount } from 'svelte';
-	import Icon from '$lib/components/Icon.svelte';
 	import Button from '$lib/components/Button.svelte';
-	import { message_state } from '$lib/state/messages.svelte';
-	import Message from '$lib/components/Message.svelte';
-	import { user_state } from '$lib/state/user.svelte';
+	import Icon from '$lib/components/Icon.svelte';
 
 	let { children } = $props();
 	let login_popover_open = $state(false);
+	let logged_in = $state(false);
+	let theme: string | null = $state(null);
 
 	onMount(() => {
 		localStorage.setItem('theme', 'light'); // TODO: hardcoded light mode for now
-		const theme = localStorage.getItem('theme');
+		theme = localStorage.getItem('theme');
 		if (theme !== null && theme === 'dark') {
 			document.documentElement.classList.add('dark');
 		} else {
 			document.documentElement.classList.add('light');
 		}
-		user_state.update(window);
 	});
 
 	function toggleTheme() {
@@ -29,10 +27,13 @@
 		} else {
 			localStorage.setItem('theme', 'light');
 		}
+		theme = localStorage.getItem('theme');
 	}
 </script>
 
-<header class="m-8 grid grid-cols-[auto_1fr_auto] items-center gap-8 rounded-xl p-4">
+<header
+	class="bg-base-200 m-8 grid grid-cols-[auto_1fr_auto_auto] items-center gap-8 rounded-xl p-4"
+>
 	<img src="/logo.svg" class="h-7 w-7 invert" alt="logo" />
 	<div id="title" class="text-base font-bold opacity-95">CLINGO DASH</div>
 	<nav class="flex flex-row gap-2">
@@ -41,24 +42,21 @@
 		<NavButton label="History" href="#" disabled={true} />
 		<NavButton label="Settings" href="#" disabled={true} />
 	</nav>
-	<button onclick={toggleTheme}>Mode</button>
+	<button onclick={toggleTheme}>
+		{#if theme == 'light'}
+			<Icon name="dark" />
+		{:else}
+			<Icon name="light" />
+		{/if}
+	</button>
 </header>
 <main class="px-8">
 	{@render children()}
 </main>
 <div id="login-reminder" class="login-popover {login_popover_open ? '' : 'closed'}">
-	{#if user_state.logged_in}
+	{#if logged_in}
 		<div class="flex flex-col gap-4">
-			<div>Logged in</div>
-			<div>{user_state.username}</div>
-			<div>{user_state.email}</div>
-			<Button
-				class="flex justify-center"
-				href="/auth/logout"
-				onclick={() => {
-					login_popover_open = false;
-				}}>Logout</Button
-			>
+			<Button class="flex justify-center">Logout</Button>
 		</div>
 	{:else}
 		<div class="flex flex-col gap-4">
@@ -83,10 +81,6 @@
 </div>
 
 <style>
-	header {
-		background: color-mix(in srgb, var(--color-foreground) 10%, transparent);
-		backdrop-filter: blur(100px);
-	}
 	.login-popover {
 		position: absolute;
 		right: calc(theme('width.8') + theme('width.4'));
