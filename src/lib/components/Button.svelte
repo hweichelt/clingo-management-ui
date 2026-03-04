@@ -3,8 +3,10 @@
 
 	interface ButtonProps {
 		children: Snippet;
-		variant?: 'primary' | 'secondary';
+		variant?: 'default' | 'ghost';
 		shortcut?: string;
+		size?: 'default' | 'icon';
+		shape?: 'square' | 'rounded' | 'round';
 		class?: string;
 		onclick?: () => void;
 		href?: string;
@@ -15,27 +17,23 @@
 		disabled,
 		href,
 		onclick,
-		variant = 'primary',
+		variant = 'default',
+		size = 'default',
+		shape = 'rounded',
 		class: className = '',
 		shortcut,
 		children
 	}: ButtonProps = $props();
+
+	let class_string = `flex cursor-pointer border flex-row items-center gap-2 rounded-lg border-2 px-3.5 py-1.5 ${className} variant-${variant} size-${size} shape-${shape}`;
 </script>
 
 {#if href !== undefined}
-	<a
-		{href}
-		{onclick}
-		class="border-primary bg-primary/35 flex cursor-pointer flex-row items-center gap-2 rounded-xl border-4 px-3.5 py-1.5 {className} variant-{variant}"
-	>
+	<a {href} {onclick} class={class_string}>
 		{@render children()}
 	</a>
 {:else}
-	<button
-		{onclick}
-		{disabled}
-		class="border-primary bg-primary/35 flex cursor-pointer flex-row items-center gap-2 rounded-xl border-4 px-3.5 py-1.5 {className} variant-{variant}"
-	>
+	<button {onclick} {disabled} class={class_string}>
 		{@render children()}
 		{#if shortcut !== undefined}
 			<div class="border-foreground/50 bg-foreground/10 rounded-md border-2 px-2 py-0.5 text-xs">
@@ -46,20 +44,24 @@
 {/if}
 
 <style>
-	.variant-secondary {
+	button.variant-ghost {
+		background: transparent;
 		border-color: transparent;
-		background: color-mix(in srgb, var(--color-foreground) 10%, transparent);
-		transition-property: border-color, background-color;
-		transition-duration: 200ms;
 	}
-	.variant-secondary:hover {
+	button.variant-ghost:hover {
+		background: color-mix(in srgb, var(--color-primary) 25%, transparent);
 		border-color: var(--color-primary);
-		background: color-mix(in srgb, var(--color-primary) 35%, transparent);
 	}
 	button:disabled {
 		border-color: color-mix(in srgb, var(--color-foreground) 35%, transparent);
 		background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
 		opacity: 50%;
 		cursor: default;
+	}
+	.size-icon {
+		padding: 0.5rem;
+	}
+	.shape-round {
+		border-radius: 50%;
 	}
 </style>

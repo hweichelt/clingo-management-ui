@@ -32,23 +32,23 @@
 </script>
 
 <header
-	class="bg-base-200 m-8 grid grid-cols-[auto_1fr_auto_auto] items-center gap-8 rounded-xl p-4"
+	class="bg-base-100 border-base-300 m-8 grid grid-cols-[auto_1fr_auto_auto] items-center gap-8 rounded-xl border px-6 py-4 shadow-xs"
 >
 	<img src="/logo.svg" class="h-7 w-7 invert" alt="logo" />
-	<div id="title" class="text-base font-bold opacity-95">CLINGO DASH</div>
+	<div id="title" class="text-lg font-medium">ClingoDashboard</div>
 	<nav class="flex flex-row gap-2">
-		<NavButton label="Overview" href="/" />
-		<NavButton label="Tasks" href="/tasks/" />
-		<NavButton label="History" href="#" disabled={true} />
-		<NavButton label="Settings" href="#" disabled={true} />
+		<NavButton icon="dashboard" label="Overview" href="/" />
+		<NavButton icon="task" label="Tasks" href="/tasks/" />
+		<NavButton icon="history" label="History" href="#" disabled={true} />
+		<NavButton icon="settings" label="Settings" href="#" disabled={true} />
 	</nav>
-	<button onclick={toggleTheme}>
+	<Button onclick={toggleTheme} size="icon" shape="round" variant="ghost">
 		{#if theme == 'light'}
-			<Icon name="dark" />
+			<Icon name="dark" class="h-5 w-5" />
 		{:else}
-			<Icon name="light" />
+			<Icon name="light" class="h-5 w-5" />
 		{/if}
-	</button>
+	</Button>
 </header>
 <main class="px-8">
 	{@render children()}
