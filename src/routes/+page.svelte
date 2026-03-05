@@ -4,7 +4,7 @@
 	import ProcessCard from '$lib/components/ProcessCard.svelte';
 </script>
 
-<div class="grid grid-cols-[1fr_2fr] gap-4">
+<div class="grid grid-cols-[2fr_3fr] gap-4">
 	<div
 		class="bg-base-100 border-base-300 flex flex-col gap-4 rounded-xl border p-4 shadow-xs backdrop-blur-lg"
 	>
@@ -12,9 +12,9 @@
 			<span class="opacity-60">Running Processes</span>
 		</div>
 		<div class="flex flex-col gap-2">
-			<ProcessCard label="Massive Configuration" progress={0.67} />
-			<ProcessCard label="Flatland" progress={0.33} />
-			<ProcessCard label="Sudoku" progress={1} />
+			<ProcessCard label="Massive Configuration" server="Compute Node A" progress={0.67} />
+			<ProcessCard label="Flatland" server="Compute Node B" progress={0.33} />
+			<ProcessCard label="Sudoku" server="Compute Node B" progress={1} />
 		</div>
 	</div>
 	<DashboardPanel label="System Resources">
