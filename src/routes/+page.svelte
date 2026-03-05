@@ -1,5 +1,6 @@
 <script>
 	import DashboardPanel from '$lib/components/DashboardPanel.svelte';
+	import PlotSystemResources from '$lib/components/PlotSystemResources.svelte';
 	import ProcessCard from '$lib/components/ProcessCard.svelte';
 </script>
 
@@ -17,6 +18,8 @@
 		</div>
 	</div>
 	<DashboardPanel label="System Resources">
-		<div></div>
+		<div class="border-base-300 bg-base-200 rounded-md border px-4">
+			<PlotSystemResources />
+		</div>
 	</DashboardPanel>
 </div>
