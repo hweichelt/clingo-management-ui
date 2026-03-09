@@ -8,5 +8,5 @@
 </script>
 
 <div class="dark:invert">
-	<img src="/icons/{name}.svg" alt="name" class={className} />
+	<img src="/icons/{name}.svg" alt={name} class={className} />
 </div>

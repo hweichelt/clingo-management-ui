@@ -1,5 +1,6 @@
 <script>
 	import DashboardPanel from '$lib/components/DashboardPanel.svelte';
+	import NodeStatusCard from '$lib/components/NodeStatusCard.svelte';
 	import PlotSystemResources from '$lib/components/PlotSystemResources.svelte';
 	import ProcessCard from '$lib/components/ProcessCard.svelte';
 </script>
@@ -18,6 +19,11 @@
 		</div>
 	</div>
 	<DashboardPanel label="System Resources">
+		<div class="grid grid-cols-3 gap-2">
+			<NodeStatusCard name="Compute Node A" status="running" />
+			<NodeStatusCard name="Compute Node B" status="running" />
+			<NodeStatusCard name="Compute Node C" />
+		</div>
 		<div class="border-base-300 bg-base-200 rounded-md border px-4">
 			<PlotSystemResources />
 		</div>

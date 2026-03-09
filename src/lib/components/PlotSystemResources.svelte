@@ -35,7 +35,7 @@
 	grid
 	inset={10}
 	y={{ tickSpacing: 30, nice: true }}
-	x={{ tickSpacing: 90, insetRight: 30 }}
+	x={{ tickSpacing: 90, insetRight: 45 }}
 	height={250}
 >
 	<RuleY data={[0]} />
@@ -52,7 +52,7 @@
 			fill="currentColor"
 			textAnchor="start"
 			dx={6}
-			text={(d) => d.y.toFixed(0)}
+			text={(d) => `${d.y.toFixed(0)} (A)`}
 		/>
 	{/if}
 </Plot>

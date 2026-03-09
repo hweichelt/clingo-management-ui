@@ -34,7 +34,7 @@
 <header
 	class="bg-base-100 border-base-300 m-8 grid grid-cols-[auto_1fr_auto_auto] items-center gap-8 rounded-xl border px-6 py-4 shadow-xs"
 >
-	<img src="/logo.svg" class="h-7 w-7 invert" alt="logo" />
+	<Icon name="logo" class="h-7 w-7" />
 	<div id="title" class="text-lg font-medium">ClingoDashboard</div>
 	<nav class="flex flex-row gap-2">
 		<NavButton icon="dashboard" label="Overview" href="/" />

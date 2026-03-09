@@ -3,6 +3,7 @@
 <script lang="ts">
 	import Icon from './Icon.svelte';
 	import Progress from './Progress.svelte';
+	import { Plot, Line, AxisY, AxisX } from 'svelteplot';
 
 	interface ProcessCardProps {
 		label: string;
@@ -15,6 +16,19 @@
 
 	let expanded = $state(true);
 	let expanded_class = $derived(expanded ? 'expanded' : '');
+
+	let dummy_data_models = [
+		{ timestep: 1, models: 0 },
+		{ timestep: 2, models: 0 },
+		{ timestep: 3, models: 1 },
+		{ timestep: 4, models: 3 },
+		{ timestep: 5, models: 7 },
+		{ timestep: 6, models: 15 },
+		{ timestep: 7, models: 29 },
+		{ timestep: 8, models: 36 },
+		{ timestep: 9, models: 41 },
+		{ timestep: 10, models: 44 }
+	];
 
 	function toggle_expanded() {
 		expanded = !expanded;
@@ -73,9 +87,15 @@
 					<div>Models Found</div>
 					<div>174</div>
 				</div>
+				<div>
+					<div>Optimization</div>
+					<div>62</div>
+				</div>
 			</div>
-			<div class="flex flex-col gap-2">
-				<div></div>
+			<div class="bg-base-200/75 rounded-xl p-2">
+				<Plot height={150} inset={10} grid>
+					<Line data={dummy_data_models} x="timestep" y="models" opacity={0.4} />
+				</Plot>
 			</div>
 		</div>
 	{/if}
